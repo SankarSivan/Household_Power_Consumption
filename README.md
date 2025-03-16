@@ -15,13 +15,18 @@ Smart Grid Integration: Enable predictive analytics for real-time energy optimiz
 Environmental Impact: Reduce carbon footprints and support conservation initiatives.
 
 ## Variables Table
-Variable Name	Role	Type	Description	Units	Missing Values
-Date	Feature	Date			no
-Time	Feature	Categorical			no
-Global_active_power	Feature	Continuous			no
-Global_reactive_power	Feature	Continuous			no
-Voltage	Feature	Continuous			no
-Global_intensity	Feature	Continuous			no
-Sub_metering_1	Feature	Continuous			no
-Sub_metering_2	Feature	Continuous			no
-Sub_metering_3	Feature	Continuous			no
+
+| Variable Name          | Role     | Type         | Description                                     | Units | Missing Values |
+|--------------------------|----------|--------------|-------------------------------------------------|-------|----------------|
+| Date                     | Feature  | Date         | Date                                            |       | no             |
+| Time                     | Feature  | Categorical  | Time                                            |       | no             |
+| Global_active_power      | Feature  | Continuous   | Global active power                             |       | no             |
+| Global_reactive_power    | Feature  | Continuous   | Global reactive power                           |       | no             |
+| Voltage                  | Feature  | Continuous   | Voltage                                         |       | no             |
+| Global_intensity         | Feature  | Continuous   | Global intensity                                |       | no             |
+| Sub_metering_1           | Feature  | Continuous   | Sub-metering 1                                  |       | no             |
+| Sub_metering_2           | Feature  | Continuous   | Sub-metering 2                                  |       | no             |
+| Sub_metering_3           | Feature  | Continuous   | Sub-metering 3                                  |       | no             |
+
+## Dataset Files
+household_power_consumption.txt	                           126.8 MB
