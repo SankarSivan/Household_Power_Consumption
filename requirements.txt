@@ -6,3 +6,5 @@ matplotlib
 requests
 joblib
 numpy
+glob
+pickle
