@@ -15,7 +15,7 @@ st.title("⚡ Household Energy Usage Prediction App")
 st.markdown("Enter the input parameters to predict **Global Active Power (kW)**.")
 
 # Load all batch files dynamically from the 'pkl' directory
-batch_dir = r"\pkl_batches"
+batch_dir = "pkl_batches"  # Use relative path
 
 batch_files = sorted(glob.glob(os.path.join(batch_dir, "data_batch_*.pkl")))
 
@@ -24,6 +24,10 @@ for batch_file in batch_files:
     with open(batch_file, "rb") as f:
         batch = pickle.load(f)
         batches.append(batch)
+
+if not batches:
+    st.error("No batch files found in 'pkl_batches'. Please check the folder and file names.")
+    st.stop()
 
 # Concatenate if needed
 full_pkl = pd.concat(batches)
