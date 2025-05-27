@@ -15,7 +15,7 @@ st.title("⚡ Household Energy Usage Prediction App")
 st.markdown("Enter the input parameters to predict **Global Active Power (kW)**.")
 
 # Load all batch files dynamically from the 'pkl' directory
-batch_dir = r"pkl_batches"
+batch_dir = r"\pkl_batches"
 
 batch_files = sorted(glob.glob(os.path.join(batch_dir, "data_batch_*.pkl")))
 
@@ -31,7 +31,7 @@ full_pkl = pd.concat(batches)
 # Load model
 model_path = "best_energy_model.pkl"
 
-if not os.path.exists(full_pkl):
+if not os.path.exists(model_path):
     st.error("Model file not found! Please ensure 'best_energy_model.pkl' is in the same folder as this script.")
     st.stop()
 
