@@ -27,7 +27,7 @@ for batch_file in batch_files:
 full_pkl = pd.concat(batches)
 
 # Load model
-model_path = "full_pkl"  
+model_path = "best_energy_model.pkl"
 
 if not os.path.exists(model_path):
     st.error("Model file not found! Please ensure 'best_energy_model.pkl' is in the same folder as this script.")
