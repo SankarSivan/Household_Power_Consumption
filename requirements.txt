@@ -7,5 +7,3 @@ scikit-learn
 requests
 joblib
 numpy
-glob
-pickle
