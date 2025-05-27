@@ -3,6 +3,9 @@ import streamlit as st
 import pandas as pd
 import joblib
 import os
+import glob
+import pickle
+
 
 # Page configuration
 st.set_page_config(page_title="Power Consumption Predictor", page_icon="⚡", layout="centered")
@@ -11,8 +14,20 @@ st.set_page_config(page_title="Power Consumption Predictor", page_icon="⚡", la
 st.title("⚡ Household Energy Usage Prediction App")
 st.markdown("Enter the input parameters to predict **Global Active Power (kW)**.")
 
+# Load all batch files dynamically from the 'pkl' directory
+batch_dir = r"SankarSivan/Household_Power_Consumption/pkl_batches"
+batch_files = sorted(glob.glob(os.path.join(batch_dir, "data_batch_*.pkl")))
+batches = []
+for batch_file in batch_files:
+    with open(batch_file, "rb") as f:
+        batch = pickle.load(f)
+        batches.append(batch)
+
+# Concatenate if needed
+full_pkl = pd.concat(batches)
+
 # Load model
-model_path = "best_energy_model.pkl"
+model_path = "best_energy_model.pkl"  # Correct model file name
 
 if not os.path.exists(model_path):
     st.error("Model file not found! Please ensure 'best_energy_model.pkl' is in the same folder as this script.")
@@ -51,3 +66,5 @@ st.markdown(
     "<small>Developed by Sankar | Powered by Streamlit & Scikit-learn</small>", 
     unsafe_allow_html=True
 )
+
+# --- End of the app ---

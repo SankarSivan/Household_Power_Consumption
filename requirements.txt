@@ -6,3 +6,4 @@ matplotlib
 requests
 joblib
 numpy
+huggingface_hub
