@@ -16,7 +16,9 @@ st.markdown("Enter the input parameters to predict **Global Active Power (kW)**.
 
 # Load all batch files dynamically from the 'pkl' directory
 batch_dir = r"pkl_batches"
+
 batch_files = sorted(glob.glob(os.path.join(batch_dir, "data_batch_*.pkl")))
+
 batches = []
 for batch_file in batch_files:
     with open(batch_file, "rb") as f:
