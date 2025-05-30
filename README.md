@@ -15,11 +15,7 @@ The primary goal is to develop a predictive model for **Global Active Power (kW)
 - [Modeling](#modeling)
 - [Model Evaluation](#model-evaluation)
 - [Streamlit Application](#streamlit-application)
-- [Repository Structure](#repository-structure)
-- [Dependencies](#dependencies)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Data Source
 
