@@ -27,8 +27,6 @@ st.write("Model expects features:", model.feature_names_in_)
 # --- Sidebar Inputs ---
 st.sidebar.header("🧮 Input Features")
 
-# Update these inputs to match the model's expected features
-# Example assumes model expects: hour, weekday, Voltage, Global_intensity
 hour = st.sidebar.slider("Hour of Day", 0, 23, 12)
 weekday = st.sidebar.selectbox(
     "Weekday",
@@ -37,13 +35,15 @@ weekday = st.sidebar.selectbox(
 )
 voltage = st.sidebar.slider("Voltage (V)", 220.0, 250.0, 235.0)
 global_intensity = st.sidebar.slider("Global Intensity (A)", 0.0, 50.0, 10.0)
+total_sub_metering = st.sidebar.slider("Total Sub Metering", 0.0, 80.0, 10.0)  # Adjust max as needed
 
 # --- Create DataFrame ---
 input_data = pd.DataFrame({
     "hour": [hour],
     "weekday": [weekday],
     "Voltage": [voltage],
-    "Global_intensity": [global_intensity]
+    "Global_intensity": [global_intensity],
+    "Total_sub_metering": [total_sub_metering]
 })
 
 # --- Prediction ---
