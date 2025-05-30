@@ -1,11 +1,9 @@
-
 import streamlit as st
 import pandas as pd
 import joblib
 import os
 import glob
 import pickle
-
 
 # Page configuration
 st.set_page_config(page_title="Power Consumption Predictor", page_icon="⚡", layout="centered")
@@ -14,51 +12,38 @@ st.set_page_config(page_title="Power Consumption Predictor", page_icon="⚡", la
 st.title("⚡ Household Energy Usage Prediction App")
 st.markdown("Enter the input parameters to predict **Global Active Power (kW)**.")
 
-# Load all batch files dynamically from the 'pkl' directory
-batch_dir = "pkl_batches"  # Use relative path
-
-batch_files = sorted(glob.glob(os.path.join(batch_dir, "data_batch_*.pkl")))
-
-batches = []
-for batch_file in batch_files:
-    with open(batch_file, "rb") as f:
-        batch = pickle.load(f)
-        batches.append(batch)
-
-if not batches:
-    st.error("No batch files found in 'pkl_batches'. Please check the folder and file names.")
-    st.stop()
-
-# Concatenate if needed
-full_pkl = pd.concat(batches)
-
 # Load model
-model_path = "best_energy_model.pkl"
+model_path = "Ops_rf_model.pkl"
 
 if not os.path.exists(model_path):
-    st.error("Model file not found! Please ensure 'best_energy_model.pkl' is in the same folder as this script.")
+    st.error("Model file not found! Please ensure 'Ops_rf_model.pkl' is in the same folder as this script.")
     st.stop()
 
 model = joblib.load(model_path)
 
+# Show expected features for debugging
+st.write("Model expects features:", model.feature_names_in_)
+
 # --- Sidebar Inputs ---
 st.sidebar.header("🧮 Input Features")
 
+# Update these inputs to match the model's expected features
+# Example assumes model expects: hour, weekday, Voltage, Global_intensity
 hour = st.sidebar.slider("Hour of Day", 0, 23, 12)
-weekday = st.sidebar.selectbox("Weekday", 
-                               options=[0, 1, 2, 3, 4, 5, 6],
-                               format_func=lambda x: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"][x])
+weekday = st.sidebar.selectbox(
+    "Weekday",
+    options=[0, 1, 2, 3, 4, 5, 6],
+    format_func=lambda x: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"][x]
+)
 voltage = st.sidebar.slider("Voltage (V)", 220.0, 250.0, 235.0)
-total_sub_metering = st.sidebar.slider("Total Sub Metering", 0.0, 100.0, 20.0)
-daily_avg_power = st.sidebar.slider("Daily Avg Power (kW)", 0.0, 10.0, 2.0)
+global_intensity = st.sidebar.slider("Global Intensity (A)", 0.0, 50.0, 10.0)
 
 # --- Create DataFrame ---
 input_data = pd.DataFrame({
     "hour": [hour],
     "weekday": [weekday],
     "Voltage": [voltage],
-    "Total_sub_metering": [total_sub_metering],
-    "daily_avg_power": [daily_avg_power]
+    "Global_intensity": [global_intensity]
 })
 
 # --- Prediction ---
